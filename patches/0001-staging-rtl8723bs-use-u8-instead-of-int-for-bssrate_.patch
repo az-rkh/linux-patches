@@ -1,0 +1,67 @@
+From 0cc8eef7187524c4bc8b28e0f16264e4dda87ab2 Mon Sep 17 00:00:00 2001
+From: Azamat Rakhim <azamatrakhim8@gmail.com>
+Date: Tue, 10 Feb 2026 21:41:19 +0500
+Subject: [PATCH] staging: rtl8723bs: use u8 instead of int for bssrate_len in
+ get_rate_set()
+
+Replace int with u8 for bssrate_len in get_rate_set() and update
+all callers to match. This addresses the driver's TODO.
+
+Signed-off-by: Azamat Rakhim <azamatrakhim8@gmail.com>
+---
+ drivers/staging/rtl8723bs/core/rtw_mlme_ext.c    | 4 ++--
+ drivers/staging/rtl8723bs/core/rtw_wlan_util.c   | 2 +-
+ drivers/staging/rtl8723bs/include/rtw_mlme_ext.h | 2 +-
+ 3 files changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/drivers/staging/rtl8723bs/core/rtw_mlme_ext.c b/drivers/staging/rtl8723bs/core/rtw_mlme_ext.c
+index ac49bfbaa5bb..47c13a0294b1 100644
+--- a/drivers/staging/rtl8723bs/core/rtw_mlme_ext.c
++++ b/drivers/staging/rtl8723bs/core/rtw_mlme_ext.c
+@@ -2458,7 +2458,7 @@ static int _issue_probereq(struct adapter *padapter,
+ 	struct xmit_priv *pxmitpriv = &(padapter->xmitpriv);
+ 	struct mlme_priv *pmlmepriv = &(padapter->mlmepriv);
+ 	struct mlme_ext_priv *pmlmeext = &(padapter->mlmeextpriv);
+-	int	bssrate_len = 0;
++	u8	bssrate_len = 0;
+ 
+ 	pmgntframe = alloc_mgtxmitframe(pxmitpriv);
+ 	if (!pmgntframe)
+@@ -2846,7 +2846,7 @@ void issue_assocreq(struct adapter *padapter)
+ 	struct mlme_priv *pmlmepriv = &(padapter->mlmepriv);
+ 	struct mlme_ext_priv *pmlmeext = &(padapter->mlmeextpriv);
+ 	struct mlme_ext_info *pmlmeinfo = &(pmlmeext->mlmext_info);
+-	int	bssrate_len = 0, sta_bssrate_len = 0;
++	u8	bssrate_len = 0, sta_bssrate_len = 0;
+ 	u8 vs_ie_length = 0;
+ 
+ 	pmgntframe = alloc_mgtxmitframe(pxmitpriv);
+diff --git a/drivers/staging/rtl8723bs/core/rtw_wlan_util.c b/drivers/staging/rtl8723bs/core/rtw_wlan_util.c
+index 5ffefa50699e..f17741f81147 100644
+--- a/drivers/staging/rtl8723bs/core/rtw_wlan_util.c
++++ b/drivers/staging/rtl8723bs/core/rtw_wlan_util.c
+@@ -159,7 +159,7 @@ unsigned int ratetbl2rateset(struct adapter *padapter, unsigned char *rateset)
+ 	return len;
+ }
+ 
+-void get_rate_set(struct adapter *padapter, unsigned char *pbssrate, int *bssrate_len)
++void get_rate_set(struct adapter *padapter, unsigned char *pbssrate, u8 *bssrate_len)
+ {
+ 	unsigned char supportedrates[NumRates];
+ 
+diff --git a/drivers/staging/rtl8723bs/include/rtw_mlme_ext.h b/drivers/staging/rtl8723bs/include/rtw_mlme_ext.h
+index dd5080056e58..99c09c71c005 100644
+--- a/drivers/staging/rtl8723bs/include/rtw_mlme_ext.h
++++ b/drivers/staging/rtl8723bs/include/rtw_mlme_ext.h
+@@ -432,7 +432,7 @@ extern struct xmit_frame *alloc_mgtxmitframe(struct xmit_priv *pxmitpriv);
+ 
+ u8 networktype_to_raid_ex(struct adapter *adapter, struct sta_info *psta);
+ 
+-void get_rate_set(struct adapter *padapter, unsigned char *pbssrate, int *bssrate_len);
++void get_rate_set(struct adapter *padapter, unsigned char *pbssrate, u8 *bssrate_len);
+ void set_mcs_rate_by_mask(u8 *mcs_set, u32 mask);
+ void update_basic_rate_table(struct adapter *padapter, u8 *mBratesOS);
+ void update_basic_rate_table_soft_ap(u8 *bssrateset, u32 bssratelen);
+-- 
+2.43.0
+

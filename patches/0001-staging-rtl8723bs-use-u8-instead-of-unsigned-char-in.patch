@@ -1,0 +1,32 @@
+From c6e750d9b34e4ec252d8bcabec16e2aa750c848d Mon Sep 17 00:00:00 2001
+From: Azamat Rakhim <azamatrakhim8@gmail.com>
+Date: Mon, 9 Feb 2026 22:30:44 +0500
+Subject: [PATCH] staging: rtl8723bs: use u8 instead of unsigned char in
+ get_rate_set()
+
+Replace "unsigned char" with "u8" to address the driver's TODO.
+
+Signed-off-by: Azamat Rakhim <azamatrakhim8@gmail.com>
+---
+ drivers/staging/rtl8723bs/core/rtw_wlan_util.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/staging/rtl8723bs/core/rtw_wlan_util.c b/drivers/staging/rtl8723bs/core/rtw_wlan_util.c
+index 5ffefa50699e..3ad1c10e5073 100644
+--- a/drivers/staging/rtl8723bs/core/rtw_wlan_util.c
++++ b/drivers/staging/rtl8723bs/core/rtw_wlan_util.c
+@@ -159,9 +159,9 @@ unsigned int ratetbl2rateset(struct adapter *padapter, unsigned char *rateset)
+ 	return len;
+ }
+ 
+-void get_rate_set(struct adapter *padapter, unsigned char *pbssrate, int *bssrate_len)
++void get_rate_set(struct adapter *padapter, u8 *pbssrate, int *bssrate_len)
+ {
+-	unsigned char supportedrates[NumRates];
++	u8 supportedrates[NumRates];
+ 
+ 	memset(supportedrates, 0, NumRates);
+ 	*bssrate_len = ratetbl2rateset(padapter, supportedrates);
+-- 
+2.43.0
+

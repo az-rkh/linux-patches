@@ -13,6 +13,7 @@ Patches submitted to the Linux kernel mailing list by [Azamat Rakhim](mailto:aza
 | 3 | staging: rtl8723bs: simplify boolean test in rtw_btcoex_MediaStatusNotify (v2 1/2) | Reviewed | [lore](https://lore.kernel.org/20260208175120.15717-1-azamatrakhim8@gmail.com/) |
 | 4 | staging: rtl8723bs: remove extra blank lines in rtw_btcoex.c (v2 2/2) | Reviewed | [lore](https://lore.kernel.org/20260208175120.15717-2-azamatrakhim8@gmail.com/) |
 | 5 | staging: rtl8723bs: clean up checkpatch warnings in rtw_btcoex.c | Reviewed | [lore](https://lore.kernel.org/20260207210124.10094-1-azamatrakhim8@gmail.com/) |
+| 6 | staging: rtl8723bs: remove unused MAX_PATH_NUM defines for other chips | Reviewed | [lore](https://lore.kernel.org/20260215155659.67324-1-azamatrakhim8@gmail.com/) |
 
 ## About
 
